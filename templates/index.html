@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Weather Application</h1>
+        <p> A simple weather application. 
+            Tell me your city and I will tell you the weather.</p>
+        <form method="post" action="/generate_report">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" />
+            <input type="radio" id="report1" name="report" value="current" checked>
+            <label for="report1">Current Weather Situation</label>
+            <input type="radio" id="report2" name="report" value="ten_day">
+            <label for="report2">Ten Day History</label>
+            <button type="submit" >Submit</button>
+        </form>
+    </body>
+</html>
