@@ -22,7 +22,7 @@ form {
 
 .city-input {
     width: 100%;
-    padding: 12px 20px;
+    padding: 1%;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -40,6 +40,10 @@ form {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
+}
+
+input[type=radio] {
+    accent-color: #2e6f7e;
 }
 
 .options {
