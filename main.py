@@ -1,10 +1,13 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import city_search.cities as cities
 import open_meteo.client as client
 import visualisation.plotter as plotter
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='', 
+            static_folder='templates/static',
+            template_folder='templates')
 
 @app.route('/', methods=['GET'])
 def index():
@@ -19,3 +22,9 @@ def generate_report():
     response = client.get_weather(city["lat"], city["lng"], current)
     script, div = plotter.get_plot(response, current)
     return render_template('report.html', city=city, script=script, div=div)
+
+@app.route('/autocomplete', methods=['GET'])
+def find_cities():
+    name = request.args.get('name')
+    results = cities.find_city_incomplete(name)
+    return jsonify(results)
