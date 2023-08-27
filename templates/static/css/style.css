@@ -1,0 +1,60 @@
+body {
+    padding: 3%;
+}
+
+h1 {
+    text-align: center;
+    color: #2e6f7e;
+}
+
+p {
+    text-align: center;
+    color: #2e6f7e;
+}
+
+form {
+    border: 3px solid #f1f1f1;
+    width: 50%;
+    margin: auto;
+    padding: 3%;
+    background-color: #f1f1f1;
+}
+
+.city-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+.city-input > label {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.city-input > input[type=search] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+.options {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+button {
+    width: 10%;
+    margin: auto;
+    padding: 10px;
+}
+
+.button {
+    left: 40%;
+    position: relative;
+}
