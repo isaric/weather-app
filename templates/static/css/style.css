@@ -62,3 +62,8 @@ button {
     left: 40%;
     position: relative;
 }
+
+#plot {
+    position: relative;
+    left: 30%;
+}
