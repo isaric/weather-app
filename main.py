@@ -19,9 +19,10 @@ def generate_report():
     report = request.form['report']
     city = cities.find_city(city_name)
     current = report == "current"
+    title = "Prognosis" if current else "Historical data"
     response = client.get_weather(city["lat"], city["lng"], current)
     script, div = plotter.get_plot(response, current)
-    return render_template('report.html', city=city, script=script, div=div)
+    return render_template('report.html', city=city, script=script, div=div, title=title)
 
 @app.route('/autocomplete', methods=['GET'])
 def find_cities():

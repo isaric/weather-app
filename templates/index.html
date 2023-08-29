@@ -12,7 +12,9 @@
             <form method="post" action="/generate_report">
                 <div class="city-input">
                     <label for="city">City</label>
-                    <input type="search" name="city" id="city" oninput="citySearch()" list="cityList" />
+                    <input type="text" name="city" id="city" oninput="citySearch()" autocomplete="off" />
+                    <ul id="cityList">
+                    </ul>
                 </div>
                 <div class="options">
                     <input type="radio" id="report1" name="report" value="current" checked>
@@ -24,9 +26,6 @@
                     <button type="submit" >Submit</button>
                 </div>
             </form>
-            <datalist id="cityList">
-                <option value="">
-             </datalist>
         </p>
     </body>
 </html>
