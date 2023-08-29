@@ -14,4 +14,12 @@ The server is built using the Flask Python web framework.
 This application was created to help teach learners enrolled in the Python Developer program
 at Algebra in Zagreb.
 
-![Report Screenshot](doc/screenshot_weather_app.png?raw=true "Title")
+| Start                                                 | City search                                          |
+| ------------------------------------------------------|------------------------------------------------------|
+| ![Screen 1](doc/screen_1.png?raw=true "Start")        | ![Screen 2](doc/screen_2.png?raw=true "City Search") |
+
+| Prognosis                                             | Historical                                           |
+| ------------------------------------------------------|------------------------------------------------------|
+| ![Screen 3](doc/screen_3.png?raw=true "Prognosis")    | ![Screen 4](doc/screen_4.png?raw=true "Historical")  |
+
+
