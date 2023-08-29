@@ -14,6 +14,9 @@ The server is built using the Flask Python web framework.
 This application was created to help teach learners enrolled in the Python Developer program
 at Algebra in Zagreb.
 
+You can also run it as a Docker container. Build your own image using the Dockerfile included in the repo or
+pull the public image [here](https://hub.docker.com/r/isaricpv/weather-app)
+
 | Start                                                 | City search                                          |
 | ------------------------------------------------------|------------------------------------------------------|
 | ![Screen 1](doc/screen_1.png?raw=true "Start")        | ![Screen 2](doc/screen_2.png?raw=true "City Search") |
