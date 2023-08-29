@@ -8,6 +8,8 @@ def find_city(name):
             return city
         
 def find_city_incomplete(name):
+    if len(name)<3:
+        return []
     results = []
     for city in cities:
         if city["name"].lower().startswith(name.lower()):
