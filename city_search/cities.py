@@ -8,9 +8,11 @@ def find_city(name):
             return city
         
 def find_city_incomplete(name):
+    namelen = len(name)
     results = []
-    for city in cities:
-        if city["name"].lower().startswith(name.lower()):
-            results.append(city["name"])
+    if namelen > 2:
+        for city in cities:
+            if city["name"].lower().startswith(name.lower()):
+                results.append(city["name"])
     return results
 
