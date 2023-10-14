@@ -1,24 +1,45 @@
-name: Push to GCR GitHub Action
-on: [push]
+name: Release
+on:
+  push:
+
 jobs:
-  build-and-push-to-gcr:
+  docker-release:
+    name: Tagged Docker release to Google Artifact Registry
     runs-on: ubuntu-latest
+
     permissions:
       contents: 'read'
       id-token: 'write'
-    steps:      
-      - uses: actions/checkout@v3
-      - name: Authenticate to Google Cloud
-        id: auth
+
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v2
+
+      - id: auth
+        name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v0
         with:
+          token_format: access_token
           workload_identity_provider: projects/363816104163/locations/global/workloadIdentityPools/pv-labs-pool/providers/pv-labs-workload-provider
           service_account: github-actions@pv-labs.iam.gserviceaccount.com
-      - uses: RafikFarhad/push-to-gcr-github-action@v5-beta
+          access_token_lifetime: 300s
+
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v1
         with:
-          # gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
-          registry: gcr.io
-          project_id: pv-labs
-          image_name: weather-app
-          image_tag: latest
-          dockerfile: ./Dockerfile
+          registry: us-west2-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Get tag
+        id: get-tag
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - id: docker-push-tagged
+        name: Tag Docker image and push to Google Artifact Registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+             us-east-1-docker.pkg.dev/pv-labs/weather-app/weather-app:latest
