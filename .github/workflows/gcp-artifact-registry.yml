@@ -42,4 +42,4 @@ jobs:
         with:
           push: true
           tags: |
-             us-east-1-docker.pkg.dev/pv-labs/weather-app/weather-app:latest
+             us-east-1-docker.pkg.dev/pv-labs/weather-app:latest
