@@ -34,7 +34,7 @@ function getReport(e) {
     const ix = city.indexOf("(")
     const lat = city.substring(ix + 1, city.length - 1).split(",")[0]
     const lng = city.substring(ix + 1, city.length - 1).split(",")[1]
-    const report = document.getElementById("report1").value;
+    const report = document.querySelector('input[name="report"]:checked').value;
     window.location = `/generate_report?lat=${lat}&lng=${lng}&report=${report}`;
 }
 
