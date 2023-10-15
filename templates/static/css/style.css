@@ -34,7 +34,7 @@ input[type=radio] {
 
 .options {
     margin: auto;
-    width: 50%;
+    width: 40%;
     padding: 10px;
 }
 
@@ -47,9 +47,12 @@ button {
 
 
 
-#plot {
-    position: relative;
-    left: 26%;
+.bk-Figure {
+    width:unset;
+    height:unset;
+    min-width: 300px;
+    min-height: 300px;
+
 }
 
 #cityList li {
