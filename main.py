@@ -13,11 +13,14 @@ app = Flask(__name__,
 def index():
     return render_template('index.html')
 
-@app.route('/generate_report', methods=['POST'])
+@app.route('/generate_report', methods=['GET'])
 def generate_report():
-    city_name = request.form['city']
-    report = request.form['report']
-    city = cities.find_city(city_name)
+    lat = request.args['lat']
+    lng = request.args['lng']
+    report = "current"
+    if 'report' in request.args:
+        report = request.args['report']
+    city = cities.find_city(lat,lng)
     current = report == "current"
     title = "Forecast" if current else "10-day Historical data"
     response = client.get_weather(city["lat"], city["lng"], current)

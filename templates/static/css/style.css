@@ -35,13 +35,13 @@ input[type=radio] {
 .options {
     margin: auto;
     width: 40%;
-    padding: 10px;
+    padding: 1%;
 }
 
 button {
     width: 40%;
     margin: auto;
-    padding: 10px;
+    padding: 1%;
 }
 
 .bk-Figure {
