@@ -39,14 +39,13 @@ input[type=radio] {
 }
 
 button {
-    width: 10%;
+    width: 40%;
     margin: auto;
     padding: 10px;
 }
 
-.button {
-    position: relative;
-}
+
+
 
 #plot {
     position: relative;
