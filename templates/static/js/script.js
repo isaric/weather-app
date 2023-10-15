@@ -41,6 +41,5 @@ function getReport(e) {
 window.onload = () => {
     document.getElementById("cityList").addEventListener("click", onItemClick)
     document.getElementById("main-button").addEventListener("click", getReport)
-
  }
 
