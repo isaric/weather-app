@@ -19,7 +19,7 @@ def generate_report():
     report = request.form['report']
     city = cities.find_city(city_name)
     current = report == "current"
-    title = "Prognosis" if current else "Historical data"
+    title = "Forecast" if current else "10-day Historical data"
     response = client.get_weather(city["lat"], city["lng"], current)
     script, div = plotter.get_plot(response, current)
     return render_template('report.html', city=city, script=script, div=div, title=title)
