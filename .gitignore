@@ -1,2 +1,3 @@
-weather-env
+.env
 __pycache__
+.idea
