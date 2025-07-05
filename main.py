@@ -20,10 +20,10 @@ def generate_report():
     report = "current"
     if 'report' in request.args:
         report = request.args['report']
-    city = cities.find_city(lat,lng)
+    city = request.args['city']
     current = report == "current"
     title = "Forecast" if current else "10-day Historical data"
-    response = client.get_weather(city["lat"], city["lng"], current)
+    response = client.get_weather(lat, lng, current)
     script, div = plotter.get_plot(response, current)
     return render_template('report.html', city=city, script=script, div=div, title=title)
 

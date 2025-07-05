@@ -24,21 +24,29 @@
                         <input type="text" name="city" id="city" oninput="citySearch()" autocomplete="off" />
                         <ul id="cityList">
                         </ul>
+                        <!-- Hidden fields to store geolocation coordinates -->
+                        <input type="hidden" id="lat" name="lat" />
+                        <input type="hidden" id="lng" name="lng" />
+                        <!-- Location button and status -->
+                        <div class="location-section">
+                            <button id="location-button" class="btn btn-secondary mt-2">Use My Current Location</button>
+                            <p id="location-status" class="text-muted mt-1"></p>
+                        </div>
                     </div>
-                    
+
                         <div class="options">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <input type="radio" id="report1" name="report" value="current" checked>
                                     <label for="report1">Forecast</label>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <input type="radio" id="report2" name="report" value="ten_day">
                                     <label for="report2">10-day History</label>
                                 </div>
                             </div>
-                            
+
                         </div>
                     <div class="button">
                         <button id="main-button">Submit</button>
