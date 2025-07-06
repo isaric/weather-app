@@ -10,7 +10,6 @@ def get_plot(weather_data, current):
     plot = figure(x_axis_type="datetime")
     
     if current:
-        print(weather_data)
         y_range = weather_data["hourly"]["temperature_2m"]
         y2 = weather_data["hourly"]["relativehumidity_2m"]
         y3 = weather_data["hourly"]["windspeed_10m"]
