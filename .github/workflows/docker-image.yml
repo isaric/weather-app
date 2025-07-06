@@ -6,10 +6,12 @@ on:
 
 jobs:
   build:
+    name: Build and Push the latest Docker image to Docker Hub
     runs-on: ubuntu-latest
+    
     steps:
-    - uses: MaximilianoBz/dockerhub-buildpush@v1.1
     - name: Build and Push the Docker image
+    - uses: MaximilianoBz/dockerhub-buildpush@v1.1
       with:
     # Docker Registry Url, eg: docker.io
         registry_url: docker.io
