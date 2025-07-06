@@ -97,3 +97,22 @@ window.onload = () => {
         getCurrentLocation();
     });
 }
+
+// Detect keyboard navigation for accessibility focus styles
+function handleFirstTab(e) {
+    if (e.keyCode === 9) { // Tab key
+        document.body.classList.add('using-keyboard');
+        window.removeEventListener('keydown', handleFirstTab);
+        window.addEventListener('mousedown', handleMouseDownOnce);
+    }
+}
+
+function handleMouseDownOnce() {
+    document.body.classList.remove('using-keyboard');
+    window.removeEventListener('mousedown', handleMouseDownOnce);
+    window.addEventListener('keydown', handleFirstTab);
+}
+
+window.addEventListener('keydown', handleFirstTab);
+
+// Rest of your script.js code will go here

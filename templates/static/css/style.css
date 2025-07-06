@@ -1,84 +1,286 @@
+/* Global Styles */
+:root {
+    --primary-color: #198754;
+    --primary-dark: #157347;
+    --secondary-color: #6c757d;
+    --light-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --text-color: #212529;
+    --hover-color: #e9ecef;
+    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --border-radius: 0.375rem;
+    --header-gradient: linear-gradient(135deg, #198754 0%, #0d6efd 100%);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f9f9f9;
+}
+
+/* Header Styles */
+.container-fluid.bg-success {
+    background: var(--header-gradient) !important;
+    padding: 3rem 1rem !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container-fluid.bg-success h1 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.container-fluid.bg-success p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Form Styles */
 form {
-    border: 3px solid #f1f1f1;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
     margin: auto;
-    padding: 3%;
-    background-color: #f1f1f1;
+    padding: 2rem;
+    background-color: var(--light-bg);
+    box-shadow: var(--box-shadow);
+    max-width: 800px;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .city-input {
     width: 100%;
-    padding: 1%;
-    margin: 8px 0;
+    padding: 1.5rem;
+    margin: 1rem 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: white;
 }
 
-.city-input>label {
-    text-align: center;
+.city-input > label {
+    text-align: left;
     width: 100%;
     display: block;
-    padding: 1%;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1rem;
 }
 
-.city-input>input[type=search] {
+.city-input > input[type=text] {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.city-input > input[type=text]:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* Radio Button Styles */
 input[type=radio] {
-    accent-color: #2e6f7e;
+    accent-color: var(--primary-color);
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
 .options {
-    margin: auto;
-    width: 40%;
-    padding: 1%;
+    margin: 1.5rem auto;
+    width: 80%;
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.options label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 0.25rem;
+}
+
+/* Button Styles */
+.button {
+    text-align: center;
+    margin: 1.5rem 0 0.5rem;
 }
 
 button {
-    width: 40%;
-    margin: auto;
-    padding: 1%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    width: auto;
+    min-width: 150px;
 }
 
-.bk-Figure {
-    width:unset;
-    height:unset;
-    min-width: 300px;
-    min-height: 300px;
+button:hover {
+    background-color: var(--primary-dark);
+}
 
+button:focus, 
+input:focus, 
+a:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.4);
+}
+
+/* Accessibility - Skip focus outline only for mouse users */
+body:not(.using-keyboard) button:focus,
+body:not(.using-keyboard) input:focus,
+body:not(.using-keyboard) a:focus {
+    box-shadow: none;
+}
+
+#location-button {
+    background-color: var(--secondary-color);
+    margin-top: 0.75rem;
+}
+
+#location-button:hover {
+    background-color: #5a6268;
+}
+
+/* City List Styles */
+#cityList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #cityList li {
-    border: 1px solid #ddd;
-    /* Add a border to all links */
+    border: 1px solid var(--border-color);
     margin-top: -1px;
-    /* Prevent double borders */
-    background-color: #f6f6f6;
-    /* Grey background color */
-    padding: 12px;
-    /* Add some padding */
+    background-color: white;
+    padding: 0.75rem 1rem;
     text-decoration: none;
-    /* Remove default text underline */
-    font-size: 18px;
-    /* Increase the font-size */
-    color: black;
-    /* Add a black text color */
+    font-size: 1rem;
+    color: var(--text-color);
     display: block;
-    /* Make it into a block element to fill the whole list */
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
 }
 
 #cityList li:hover {
-    background-color: #eee;
-    /* Add a hover effect to all links, except for headers */
+    background-color: var(--hover-color);
 }
 
 #city {
     width: 100%;
-    padding: 0.5%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
 }
 
-#map { height: 180px; }
+/* Report Page Styles */
+.container.mt-5 {
+    margin-bottom: 3rem;
+}
+
+/* Map Styles */
+#map { 
+    height: 400px;
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+}
+
+/* Plot Styles */
+#plot {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.bk-Figure {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 300px;
+    min-height: 400px;
+    margin: 1rem auto;
+}
+
+/* Back Button */
+.back-button-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+    color: white;
+    text-decoration: none;
+}
+
+/* Location Section */
+.location-section {
+    margin-top: 1rem;
+}
+
+#location-status {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .options {
+        width: 100%;
+    }
+
+    form {
+        padding: 1rem;
+    }
+
+    .city-input {
+        padding: 1rem;
+    }
+}
