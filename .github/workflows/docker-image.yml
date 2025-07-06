@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: MaximilianoBz/dockerhub-buildpush@v1.1
+    - name: Build and Push the Docker image
+      with:
+    # Docker Registry Url, eg: docker.io
+        registry_url: docker.io
+        repository_name: isaricpv/weather-app
+        # Docker Login UserName, from: https://hub.docker.com/
+        user_name: isaricpv
+        # Docker Login Access Token, from: https://hub.docker.com/
+        password: ${DOCKER_PAT}
+        # Image Build Version
+        image_version: latest
