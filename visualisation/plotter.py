@@ -7,24 +7,45 @@ date_format_current = "%Y-%m-%dT%H:%M"
 date_format_ten_day = "%Y-%m-%d"
 
 def get_plot(weather_data, current):
-    plot = figure(x_axis_type="datetime")
-    
     if current:
-        y_range = weather_data["hourly"]["temperature_2m"]
-        y2 = weather_data["hourly"]["relativehumidity_2m"]
-        y3 = weather_data["hourly"]["windspeed_10m"]
+        # Create separate plots for temperature, humidity, and windspeed
+        temp_plot = figure(x_axis_type="datetime", title="Temperature (°C)")
+        humidity_plot = figure(x_axis_type="datetime", title="Relative Humidity (%)")
+        wind_plot = figure(x_axis_type="datetime", title="Wind Speed (km/h)")
+        
         time = [datetime.strptime(i, date_format_current) for i in weather_data["hourly"]["time"]]
-        df = {
-            'time': [time, time, time], 
-            'measure': ['Temp', 'Hum', 'Wind'], 
-            'color': ['red', 'green', 'blue'],
-            'val': [y_range, y2, y3]
+        
+        # Temperature plot
+        temp_data = weather_data["hourly"]["temperature_2m"]
+        temp_source = ColumnDataSource({'time': time, 'value': temp_data})
+        temp_plot.line(x='time', y='value', line_width=2, line_color='red', source=temp_source)
+        
+        # Humidity plot
+        humidity_data = weather_data["hourly"]["relativehumidity_2m"]
+        humidity_source = ColumnDataSource({'time': time, 'value': humidity_data})
+        humidity_plot.line(x='time', y='value', line_width=2, line_color='green', source=humidity_source)
+        
+        # Wind speed plot
+        wind_data = weather_data["hourly"]["windspeed_10m"]
+        wind_source = ColumnDataSource({'time': time, 'value': wind_data})
+        wind_plot.line(x='time', y='value', line_width=2, line_color='blue', source=wind_source)
+        
+        # Generate components for each plot
+        temp_script, temp_div = components(temp_plot)
+        humidity_script, humidity_div = components(humidity_plot)
+        wind_script, wind_div = components(wind_plot)
+        
+        return {
+            'temp_script': temp_script,
+            'temp_div': temp_div,
+            'humidity_script': humidity_script,
+            'humidity_div': humidity_div,
+            'wind_script': wind_script,
+            'wind_div': wind_div
         }
-        source = ColumnDataSource(df)
-        plot.multi_line(xs='time', ys='val', color='color', legend_field='measure',
-             line_width=2, line_alpha=0.6, hover_line_alpha=1.0,
-             source=source)
     else:
+        # For 10-day forecast, keep a single plot with max and min temperatures
+        plot = figure(x_axis_type="datetime", title="10-day Temperature Forecast")
         time = [datetime.strptime(i, date_format_ten_day) for i in weather_data["daily"]["time"]]
         y_range = weather_data["daily"]["temperature_2m_max"]
         y2 = weather_data["daily"]["temperature_2m_min"]
@@ -36,5 +57,7 @@ def get_plot(weather_data, current):
         }
         source = ColumnDataSource(df)
         plot.multi_line(xs='time', ys='val', color='color', legend_field='measure',
-             line_width=2, line_alpha=0.6, hover_line_alpha=1.0, source=source)    
-    return components(plot)
+             line_width=2, line_alpha=0.6, hover_line_alpha=1.0, source=source)
+        
+        script, div = components(plot)
+        return {'script': script, 'div': div}

@@ -24,8 +24,29 @@ def generate_report():
     current = report == "current"
     title = "Forecast" if current else "10-day Historical data"
     response = client.get_weather(lat, lng, current)
-    script, div = plotter.get_plot(response, current)
-    return render_template('report.html', city=city, script=script, div=div, title=title)
+    
+    plot_components = plotter.get_plot(response, current)
+    
+    if current:
+        # For current weather, we have separate plots for temp, humidity, and wind
+        return render_template('report.html', 
+                              city=city, 
+                              title=title,
+                              temp_script=plot_components['temp_script'],
+                              temp_div=plot_components['temp_div'],
+                              humidity_script=plot_components['humidity_script'],
+                              humidity_div=plot_components['humidity_div'],
+                              wind_script=plot_components['wind_script'],
+                              wind_div=plot_components['wind_div'],
+                              current=current)
+    else:
+        # For 10-day forecast, we have a single plot
+        return render_template('report.html', 
+                              city=city, 
+                              title=title,
+                              script=plot_components['script'],
+                              div=plot_components['div'],
+                              current=current)
 
 @app.route('/autocomplete', methods=['GET'])
 def find_cities():

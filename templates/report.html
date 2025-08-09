@@ -30,6 +30,37 @@
     </div>
 
     <div class="container mt-5">
+        {% if current %}
+        <!-- Display three separate plots for current weather -->
+        <div class="row">
+            <div class="col-md-12 mb-4 text-center">
+                <h3>Temperature (°C)</h3>
+                <div id="temp-plot">
+                    {{ temp_div | safe }}
+                    {{ temp_script | safe }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-4 text-center">
+                <h3>Relative Humidity (%)</h3>
+                <div id="humidity-plot">
+                    {{ humidity_div | safe }}
+                    {{ humidity_script | safe }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-4 text-center">
+                <h3>Wind Speed (km/h)</h3>
+                <div id="wind-plot">
+                    {{ wind_div | safe }}
+                    {{ wind_script | safe }}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Display single plot for 10-day forecast -->
         <div class="row">
             <div class="col-sm-12 text-center">
                 <div id="plot">
@@ -38,6 +69,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 
     <div class="container">
