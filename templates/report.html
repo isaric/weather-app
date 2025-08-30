@@ -34,12 +34,8 @@
             <div class="col-md-12">
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-primary text-white">AI Weather Summary</div>
-                    <div class="card-body">
-                        {% if ai_description %}
-                        <p class="mb-0">{{ ai_description }}</p>
-                        {% else %}
-                        <p class="text-muted mb-0">AI summary is not available right now.</p>
-                        {% endif %}
+                    <div class="card-body" id="ai-summary">
+                        <p id="ai-summary-text" class="text-muted mb-0">Loading AI summary...</p>
                     </div>
                 </div>
             </div>

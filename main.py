@@ -85,36 +85,53 @@ def generate_report():
     title = "Forecast" if current else "10-day Historical data"
     response = client.get_weather(lat, lng, current)
 
-    # Generate AI description (best-effort; ignore failures)
-    ai_description = generate_ai_description(city, response, current)
-    
+    # AI description will be loaded asynchronously via AJAX
     plot_components = plotter.get_plot(response, current)
     
     if current:
         # For current weather, we have separate plots for temp, humidity, and wind
         return render_template('report.html', 
-                              city=city, 
-                              title=title,
-                              temp_script=plot_components['temp_script'],
-                              temp_div=plot_components['temp_div'],
-                              humidity_script=plot_components['humidity_script'],
-                              humidity_div=plot_components['humidity_div'],
-                              wind_script=plot_components['wind_script'],
-                              wind_div=plot_components['wind_div'],
-                              ai_description=ai_description,
-                              current=current)
+                             city=city, 
+                             title=title,
+                             temp_script=plot_components['temp_script'],
+                             temp_div=plot_components['temp_div'],
+                             humidity_script=plot_components['humidity_script'],
+                             humidity_div=plot_components['humidity_div'],
+                             wind_script=plot_components['wind_script'],
+                             wind_div=plot_components['wind_div'],
+                             current=current)
     else:
         # For 10-day forecast, we have a single plot
         return render_template('report.html', 
-                              city=city, 
-                              title=title,
-                              script=plot_components['script'],
-                              div=plot_components['div'],
-                              ai_description=ai_description,
-                              current=current)
+                             city=city, 
+                             title=title,
+                             script=plot_components['script'],
+                             div=plot_components['div'],
+                             current=current)
 
 @app.route('/autocomplete', methods=['GET'])
 def find_cities():
     name = request.args.get('name')
     results = cities.find_city_incomplete(name)
     return jsonify(results)
+
+
+@app.route('/ai_description', methods=['GET'])
+def ai_description_api():
+    """Return AI-generated weather description as JSON.
+    Accepts query parameters: city, lat, lng, report ("current" or other).
+    """
+    city = request.args.get('city', '')
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+    report = request.args.get('report', 'current')
+    if not lat or not lng:
+        return jsonify({"ai_description": ""}), 400
+    current = report == 'current'
+    try:
+        weather = client.get_weather(lat, lng, current)
+        text = generate_ai_description(city, weather, current)
+        return jsonify({"ai_description": text or ""})
+    except Exception:
+        # Best-effort; hide backend errors from the UI
+        return jsonify({"ai_description": ""})
