@@ -29,7 +29,24 @@
         <div id="map"></div>
     </div>
 
-    <div class="container mt-5">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">AI Weather Summary</div>
+                    <div class="card-body">
+                        {% if ai_description %}
+                        <p class="mb-0">{{ ai_description }}</p>
+                        {% else %}
+                        <p class="text-muted mb-0">AI summary is not available right now.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
         {% if current %}
         <!-- Display three separate plots for current weather -->
         <div class="row">

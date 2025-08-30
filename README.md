@@ -26,3 +26,25 @@ pull the public image [here](https://hub.docker.com/r/isaricpv/weather-app)
 | ![Screen 3](doc/screen_3.png?raw=true "Prognosis")    | ![Screen 4](doc/screen_4.png?raw=true "Historical")  |
 
 
+
+## AI Weather Summary (Ollama)
+
+After fetching weather data from Open‑Meteo, the app can optionally call an Ollama LLM to generate a concise weather description with clothing and activity suggestions. The page will still load even if the AI call fails.
+
+Configuration (environment variables):
+- OLLAMA_BASE_URL: Base URL of your Ollama instance. Default: http://localhost:11434
+- OLLAMA_MODEL: Model name to generate with. Default: llama3
+- OLLAMA_TIMEOUT: Request timeout in seconds. Default: 10
+
+Example (Docker):
+- Ensure you have an Ollama server running on your host (e.g., listening at http://localhost:11434)
+- Run the container and point it at the host Ollama instance:
+
+  docker run -p 5000:5000 \
+    -e OLLAMA_BASE_URL=http://host.docker.internal:11434 \
+    -e OLLAMA_MODEL=llama3 \
+    isaricpv/weather-app
+
+Behavior and fallback:
+- If the Ollama endpoint is unreachable or returns an error/timeout, the app silently falls back and shows “AI summary is not available right now.”
+- The generated description is rendered as plain text (HTML-escaped) inside report.html.
