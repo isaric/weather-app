@@ -271,6 +271,21 @@ body:not(.using-keyboard) a:focus {
 }
 
 /* Responsive Adjustments */
+/* AI Summary Readability */
+#ai-summary {
+    line-height: 1.8; /* Increased line spacing for readability */
+}
+
+#ai-summary p {
+    text-indent: 1.25rem;      /* Indent first line of each paragraph */
+    margin-bottom: 0.75rem;    /* Space between paragraphs */
+    white-space: pre-wrap;     /* Preserve line breaks from AI text */
+}
+
+#ai-summary p:last-child {
+    margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
     .options {
         width: 100%;

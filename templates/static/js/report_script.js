@@ -15,7 +15,25 @@ async function fetchAiSummary() {
         const text = (data && data.ai_description) ? String(data.ai_description).trim() : '';
         if (text) {
             textEl.classList.remove('text-muted');
-            textEl.textContent = text;
+            const container = document.getElementById('ai-summary');
+            if (container) {
+                const parts = text.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 0);
+                if (parts.length > 1) {
+                    // Render multiple paragraphs for better readability
+                    container.innerHTML = '';
+                    parts.forEach((part, idx) => {
+                        const p = document.createElement('p');
+                        if (idx === 0) p.id = 'ai-summary-text';
+                        p.textContent = part;
+                        container.appendChild(p);
+                    });
+                } else {
+                    // Single paragraph
+                    textEl.textContent = text;
+                }
+            } else {
+                textEl.textContent = text;
+            }
         } else {
             textEl.classList.add('text-muted');
             textEl.textContent = 'AI summary is not available right now.';
